@@ -1,0 +1,95 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: SplashScreen()));
+}
+class SplashScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: GestureDetector(
+          onDoubleTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondScreen()),
+            );
+          },
+          child: Image.asset('assets/images/logo.png'), // Correct path
+        ),
+      ),
+    );
+  }
+}
+
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3, // Three tabs
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Natasha Altaf'), // Replace with your name
+          bottom: TabBar(
+            tabs: [
+              Tab(text: 'My Info'),
+              Tab(text: 'Hometown'),
+              Tab(text: 'Student Life'),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            GestureDetector(
+              onLongPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ThirdScreen('Your Info')),
+                );
+              },
+
+                child: Center(child: Text('I am Natasha, Computer science student. I have 2.5 years of experience as a graphic designer.'))
+            ),
+            GestureDetector(
+              onLongPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ThirdScreen('Hometown')),
+                );
+              },
+              child: Center(child: Text('I live in Islamabad')),
+            ),
+            GestureDetector(
+              onLongPress: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ThirdScreen('My time at Bahria University has been a journey of growth, learning, and building lasting friendships ')),
+                );
+              },
+              child: Center(child: Text('Information about your student life')),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ThirdScreen extends StatelessWidget {
+  final String info;
+
+  ThirdScreen(this.info);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(info),
+      ),
+      body: Center(
+        child: Text('Detailed information about $info'),
+      ),
+    );
+  }
+}
